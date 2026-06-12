@@ -1,32 +1,27 @@
-# 🔐 Vigenere Cipher Tool - Ứng dụng Mã hóa & Giải mã Mật mã Cổ điển
+# Vigenere Cipher Tool - Dự Án Mã Hóa Thử Nghiệm (C++)
 
-Dự án này là một công cụ mã hóa và giải mã văn bản dựa trên thuật toán **Mật mã Vigenère**, được phát triển hoàn toàn bằng ngôn ngữ **C++** theo phong cách hướng đối tượng (OOP). Sản phẩm được xây dựng nhằm mục đích tham gia **Trại hè Mã hóa 2026**.
-
----
-
-## 💡 Giới thiệu về Thuật toán
-Mật mã Vigenère là một phương pháp mã hóa văn bản bằng cách sử dụng một chuỗi các mật mã Caesar khác nhau dựa trên các chữ cái của một từ khóa (Key). Đây là một dạng mật mã dịch chuyển đa ký tự có tính bảo mật cao, giúp chống lại việc phân tích tần suất chữ cái cơ bản.
+Đây là một công cụ mã hóa và giải mã tin nhắn bằng **Mật mã Vigenère**, được mình viết hoàn toàn bằng ngôn ngữ **C++** dựa trên tư duy lập trình hướng đối tượng (OOP). Dự án này mình xây dựng từ đầu để nộp vào **Trại hè Mã hóa**.
 
 ---
 
-## ✨ Tính năng chính
-- **Mã hóa (Encryption):** Biến đổi văn bản gốc (Plaintext) thành chuỗi ký tự mã hóa (Ciphertext) dựa trên Từ khóa (Key) bạn nhập.
-- **Giải mã (Decryption):** Khôi phục lại chính xác văn bản ban đầu từ chuỗi đã mã hóa khi có chính xác Từ khóa.
-- **Xử lý chuỗi thông minh:** - Tự động chuẩn hóa từ khóa (chuyển thành chữ in hoa và loại bỏ ký tự không phải chữ cái).
-  - Giữ nguyên toàn bộ khoảng trắng, dấu câu, chữ số và định dạng viết hoa/viết thường của văn bản gốc khi mã hóa.
-- **Giao diện Console mượt mà:** Khắc phục hoàn toàn lỗi trôi lệnh, nhảy menu khi nhập dữ liệu; giao diện điều hướng bằng phím số (1-3) trực quan.
+## Trải nghiệm và Cách mình tối ưu Code
+Trong quá trình code từ các file cấu trúc rời rạc, mình đã gặp một số lỗi kinh điển và đã tối ưu lại hệ thống như sau:
+- **Gom gọn về 1 file duy nhất (`main.cpp`):** Giúp việc quản lý mã nguồn, biên dịch và chạy ứng dụng trở nên siêu nhanh, không lo bị lỗi liên kết file (`undefined reference`) hay thiếu thư viện header.
+- **Sửa triệt để lỗi lặp menu (Nháy màn hình):** Mình đã xử lý thành công lỗi trôi lệnh cực kỳ khó chịu khi dùng kết hợp `std::cin` và `std::getline` bằng cách đặt bộ lọc bộ nhớ đệm `std::cin.ignore(1000, '\n')` vào đúng vị trí ngay trước khi nhận văn bản.
+- **Xử lý chuỗi thông minh:** Hệ thống tự chuẩn hóa Key về chữ in hoa. Khi mã hóa, chương trình chỉ xử lý các ký tự chữ cái (A-Z, a-z), còn các khoảng trắng, dấu câu hay chữ số đều được giữ nguyên vẹn định dạng gốc.
 
 ---
 
-## 🛠️ Hướng dẫn Cài đặt & Chạy thử ứng dụng
+## Cách hoạt động của Thuật toán
+Ứng dụng áp dụng hệ thức toán học đồng dư của mật mã Vigenère để dịch chuyển từng ký tự dựa theo vòng lặp của từ khóa (Key):
+- **Công thức mã hóa:** $C_i = (P_i + K_i) \pmod{26}$
+- **Công thức giải mã:** $P_i = (C_i - K_i + 26) \pmod{26}$
 
-### 1. Yêu cầu hệ thống
-- Máy tính đã cài đặt Trình biên dịch C++ (GCC/MinGW) hỗ trợ chuẩn C++11 trở lên.
-- Cửa sổ dòng lệnh (PowerShell hoặc Command Prompt trên Windows, Terminal trên macOS/Linux).
+---
 
-### 2. Các bước biên dịch và chạy
-Mở Terminal tại thư mục chứa file dự án và chạy dòng lệnh sau:
+## Hướng dẫn Biên dịch & Chạy ứng dụng
 
-**Đối với Windows (PowerShell):**
+Bạn chỉ cần mở Terminal/PowerShell ngay tại thư mục chứa file `main.cpp` này và chạy đúng một dòng lệnh duy nhất để vừa biên dịch vừa mở phần mềm:
+
 ```bash
 g++ main.cpp -o VigenereTool ; .\VigenereTool
